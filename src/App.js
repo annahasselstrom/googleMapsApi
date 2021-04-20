@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { MapContainer } from './components/MapContainer';
+import { Map } from './components/Map';
 
 export const App = () => {
   return (
-    <div>
-      Find me in src/app.js!
-    </div>
+    <main>
+      <MapContainer />
+    </main>
   )
 }
