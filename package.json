@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@reach/combobox": "^0.15.0",
     "@react-google-maps/api": "^2.1.1",
     "babel-eslint": "^10.0.3",

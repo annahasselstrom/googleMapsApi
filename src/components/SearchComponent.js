@@ -13,7 +13,7 @@ import usePlacesAutocomplete, {
   import "@reach/combobox/styles.css";
 
   // Flytta upp all logik till Map
-  export const SearchComponent = ({ panTo }) => {
+  export const SearchComponent = ({ panTo, searchValue }) => {
     const {
       ready,
       value,
@@ -48,9 +48,9 @@ import usePlacesAutocomplete, {
         <div className="search">
             <Combobox onSelect={handleSelect}>
                 <ComboboxInput
-                    value={value}
+                    value={searchValue}
                     onChange={handleInput}
-                    disabled={!ready}
+                    //disabled={!ready}
                     placeholder="Search your location"
                 />
                 <ComboboxPopover>

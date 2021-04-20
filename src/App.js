@@ -1,11 +1,10 @@
 import React from 'react';
-import { MapContainer } from './components/MapContainer';
-import { Map } from './components/Map';
+import { HomeView } from './components/HomeView';
 
 export const App = () => {
   return (
     <main>
-      <MapContainer />
+      <HomeView />
     </main>
   )
 }
