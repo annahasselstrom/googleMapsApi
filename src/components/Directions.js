@@ -1,12 +1,10 @@
 {/*
-
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
     GoogleMap,
     useLoadScript,
     Marker,
-    withGoogleMap,
     useGoogleMap,
     DirectionsRenderer,
     DirectionsService
@@ -15,52 +13,77 @@ import {
   const google = window.google;
   const libraries = ["places"];
 
-  export const Directions = () => { 
-    const { isLoaded, loadError } = useLoadScript({
+
+ // const defaultCenter = {
+   // lat: 55.839858883271546, 
+   // lng: 13.303072329398677
+
+
+
+  export const Directions = ({ newLat, newLng, selected }) => { 
+    const prevMarkersRef = useRef([]);
+    const [directions, setDirections] = useState(null);
+
+    const { isLoaded, loadError, map } = useLoadScript({
       googleMapsApiKey: "AIzaSyCjBrOqqO578R-x_EqkXshwiJ7Cho0INBk",
       libraries,
   });
 
+  
+  let origin = {
+    lat:  55.839858883271546,
+    lng: 13.303072329398677
+  };
 
-    const [directions, setDirections] = useState(null);
-    //const directionsService = new google.maps.DirectionsService();
-    //var directionsRenderer = new google.maps.DirectionsRenderer();
-    
-    const origin = { lat: 40.756795, lng: -73.954298 };
-    const destination = { lat: 41.756795, lng: -78.954298 };
+  let destination = selected
 
-    
-    directionsService.route(
-      {
+  console.log(destination);
+
+useEffect(() => {
+       if (selected) {
+       
+        clearMarkers(prevMarkersRef.current); //clear prev markers
+        prevMarkersRef.current.push(destination);
+        map.setCenter(origin);
+
+      }, []) 
+      
+      const directionsService = new google.maps.DirectionsService();
+      const directionsRenderer = new google.maps.DirectionsRenderer();
+      
+       directionsRenderer.setMap(map);
+        calcRoute(directionsService, directionsRenderer);
+      }
+  
+    const clearMarkers = (markers) => {
+      for (let marker of markers) {
+        marker.setMap(null);
+      }
+    }
+
+
+  
+    const calcRoute = (directionsService, directionsRenderer) => {
+      let request = {
         origin: origin,
         destination: destination,
         travelMode: google.maps.TravelMode.DRIVING
-      },
-      (result, status) => {
+      };
+      directionsService.route(request, function(result, status) {
         if (status === google.maps.DirectionsStatus.OK) {
-          setDirections({
-            directions: result
-          });
-        } else {
-          console.error(`error fetching directions ${result}`);
+          directionsRenderer.setDirections(result);
+          console.log(setDirections(result))
         }
-      }
-    );
-    
+      });
+    }
   
-
-
-  return (
-      <GoogleMap
-        defaultCenter={{ lat: 40.756795, lng: -73.954298 }}
-        defaultZoom={13}
-      >
-        <DirectionsRenderer
-          directions={directions}
-        />
-      </GoogleMap>
-
+    
+    return (
+      <div>
+            <div style={{ width: 600, height: 500 }} />
+      </div>
     );
-};
-
-*/}
+  };
+  
+*/}    
+  
