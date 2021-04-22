@@ -1,26 +1,27 @@
 import React from 'react';
 import compass from '../assets/compass.svg';
 
+// Flytta upp onLocate-funktionen högre upp?
 export const LocateComponent = ({ panTo })=> {
 
-    // Flytta upp getCurrentPosition-funktionen utanför return för att undvika
-    // re-rendering?
+  const onLocate = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      () => null
+    );
+  }
+
     return (
       <button
         className="locate"
-        onClick={() => {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              panTo({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              });
-            },
-            () => null
-          );
-        }}
+        onClick={onLocate}
       >
         <img src={compass} alt="compass" className="locate"/>
       </button>
     );
-  };
+};

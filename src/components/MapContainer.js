@@ -7,6 +7,7 @@ import {
 
 import { SearchComponent } from './SearchComponent';
 import { LocateComponent } from './LocateComponent';
+import { ScrollDialog } from './ScrollDialog';
 
 
 const libraries = ["places"];
@@ -31,6 +32,9 @@ export const MapContainer = ({  searchValue })=> {
         googleMapsApiKey: "AIzaSyCjBrOqqO578R-x_EqkXshwiJ7Cho0INBk",
         libraries,
     });
+
+    const [newLat, setNewLat] = useState();
+    const [newLng, setNewLng] = useState();
 
     const [markers, setMarkers] = useState([]);
     const [currentPosition, setCurrentPosition] = useState({});
@@ -71,9 +75,18 @@ export const MapContainer = ({  searchValue })=> {
         <>
         <LocateComponent panTo={panTo} />
         <SearchComponent 
-            panTo={panTo}
-            searchValue={searchValue}
-          />
+            panTo={panTo} 
+            newLat={newLat}
+            newLng={newLng}
+            setNewLat={setNewLat}
+            setNewLng={setNewLng}
+
+            />
+        <ScrollDialog 
+        newLat={newLat}
+        newLng={newLng}
+        setNewLat={setNewLat}
+        setNewLng={setNewLng}/>
 
         <GoogleMap
             id="map"

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback,  } from 'react';
+import React, { useState } from 'react';
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
@@ -13,7 +13,9 @@ import usePlacesAutocomplete, {
   import "@reach/combobox/styles.css";
 
   // Flytta upp all logik till Map
-  export const SearchComponent = ({ panTo, searchValue }) => {
+  export const SearchComponent = ({ panTo, newLat, newLng, setNewLat, setNewLng }) => {
+    
+
     const {
       ready,
       value,
@@ -39,6 +41,8 @@ import usePlacesAutocomplete, {
           const results = await getGeocode({ address });
           const { lat, lng } = await getLatLng(results[0]);
           panTo({ lat, lng });
+          setNewLat(lat);
+          setNewLng(lng);
         } catch (error) {
           console.log("Error: ", error);
         }
@@ -48,9 +52,9 @@ import usePlacesAutocomplete, {
         <div className="search">
             <Combobox onSelect={handleSelect}>
                 <ComboboxInput
-                    value={searchValue}
+                    value={value}
                     onChange={handleInput}
-                    //disabled={!ready}
+                    disabled={!ready}
                     placeholder="Search your location"
                 />
                 <ComboboxPopover>
