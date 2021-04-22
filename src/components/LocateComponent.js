@@ -1,5 +1,6 @@
 import React from 'react';
 import compass from '../assets/compass.svg';
+import { PropTypes } from 'prop-types';
 
 // Flytta upp onLocate-funktionen högre upp?
 export const LocateComponent = ({ panTo })=> {
@@ -21,7 +22,15 @@ export const LocateComponent = ({ panTo })=> {
         className="locate"
         onClick={onLocate}
       >
-        <img src={compass} alt="compass" className="locate"/>
+        <img 
+          src={compass} 
+          alt="compass" 
+          className="locate"
+        />
       </button>
     );
+}
+
+LocateComponent.propTypes = {
+  panTo: PropTypes.func.isRequired
 };

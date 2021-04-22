@@ -51,6 +51,7 @@ h1 {
   background: none;
   border: none;
   z-index: 10;
+  padding: 20px;
 }
 .locate img {
   width: 30px;
@@ -67,4 +68,8 @@ h1 {
   padding: 0.5rem;
   font-size: 1.5rem;
   border: 1px solid black;
+}
+
+.content-dialog-container {
+  height: 140px;
 }

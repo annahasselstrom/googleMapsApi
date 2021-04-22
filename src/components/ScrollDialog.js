@@ -6,11 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { Forecast } from './Forecast';
+import PropTypes from 'prop-types';
 
 export const ScrollDialog = ({ newLat, newLng }) => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
-  const noDataMessage = "Sorry, no data available"
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -32,9 +32,12 @@ export const ScrollDialog = ({ newLat, newLng }) => {
   }, [open]);
 
   return (
-    <div>
+    <section>
       <Tooltip title="Weather on chosen location">
-         <button className="scroll-dialog" onClick={handleClickOpen('paper')}>Info</button>
+         <span 
+            className="scroll-dialog" 
+            disabled={!newLng && !newLat}
+            onClick={handleClickOpen('paper')}>Info</span>
       </Tooltip>
       <Dialog
         open={open}
@@ -49,17 +52,17 @@ export const ScrollDialog = ({ newLat, newLng }) => {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <div className="content-dialog-container">
+            <section className="content-dialog-container">
               {newLng && newLat  
               ?
                   <Forecast 
-                      newLat={newLat} 
-                      newLng={newLng}>
-                  </Forecast>
-                :
-                  {noDataMessage}
-                }                
-            </div>
+                     newLat={newLat}
+                     newLng={newLng}
+                   />
+              :
+                "Sorry, no data available"
+              }                
+            </section>
            
           </DialogContentText>
         </DialogContent>
@@ -69,6 +72,12 @@ export const ScrollDialog = ({ newLat, newLng }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </section>
   )
+}
+
+ScrollDialog.propTypes = {
+  setNewLat: PropTypes.func.isRequired,
+  setNewLng: PropTypes.func.isRequired
 };
+
