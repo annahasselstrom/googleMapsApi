@@ -24,8 +24,6 @@ export const Forecast = ({ newLat, newLng }) => {
         <section className="forecast">
             {forecast && newLat && newLng &&
                 <>
-                    <h4>Latitude: {forecast.current.humidity}</h4> 
-
                    <h4>Latitude: {forecast.lat}</h4> 
                    <h4>Longitude: {forecast.lon}</h4>
                    <h4>Timezone: {forecast.timezone}</h4>
