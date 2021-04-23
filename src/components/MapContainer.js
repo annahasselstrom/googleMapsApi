@@ -11,6 +11,7 @@ import { Directions } from './Directions';
 
 // Genom att flytta ut variablerna nedan förhindras att maps re-rendrar 
 // och går tillbaka till center position om vi t ex sätter en marker.
+const MAPS_API_KEY = "AIzaSyCjBrOqqO578R-x_EqkXshwiJ7Cho0INBk"
 const libraries = ["places"];
 const mapContainerStyle = {
     height: "100vh",
@@ -27,17 +28,19 @@ const options = {
 
 export const MapContainer = ()=> {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyCjBrOqqO578R-x_EqkXshwiJ7Cho0INBk",
+        googleMapsApiKey: MAPS_API_KEY,
         libraries,
     });
     const [newLat, setNewLat] = useState();
     const [newLng, setNewLng] = useState();
     const [markers, setMarkers] = useState([]);
     const [currentPosition, setCurrentPosition] = useState({});
+    const tooltipMessage = "Eslöv forever";
+    const mapId = "map";
     
     // får sitt värde när användaren klickar på markern -InfoWindow
     const [selected, setSelected] = useState(null);
-    console.log(selected)
+    //console.log(selected)
     const onMarkerDragEnd = (e) => {
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
@@ -60,7 +63,7 @@ export const MapContainer = ()=> {
         ]);
       }, []);
     
-    // map kommer från Google map-komponent. Låter oss accessa kartan utan att skapa onödiga 
+    // map kommer från Google map-komponent. useCallback låter oss accessa kartan utan att skapa onödiga 
     // re-renders. 
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
@@ -73,8 +76,8 @@ export const MapContainer = ()=> {
         mapRef.current.setZoom(14);
     }, []);
       
-    if (loadError) return "Error loading maps";
-    if (!isLoaded) return "Loading...";
+    if (loadError) return "Error loading map";
+    if (!isLoaded) return "Loading map";
 
     return (
         <>
@@ -93,7 +96,7 @@ export const MapContainer = ()=> {
         />
 
         <GoogleMap
-            id="map"
+            id={mapId}
             mapContainerStyle={mapContainerStyle}
             zoom={14}
             center={defaultCenter}
@@ -105,7 +108,7 @@ export const MapContainer = ()=> {
                 position={defaultCenter}
                 onDragEnd={(e) => onMarkerDragEnd(e)}
                 draggable={true}
-                title="Eslöv forever!"
+                title={tooltipMessage}
             />
 
             {markers.map(marker => 

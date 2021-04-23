@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// FLYTTA DENNA UTANFÖR
 const WEATHER_API_KEY = "bf3ca7e1fa68f11d4a59f5b647d51598"
 
 export const Forecast = ({ newLat, newLng }) => {
@@ -9,7 +8,7 @@ export const Forecast = ({ newLat, newLng }) => {
     const lon = newLng;
     const FORECAST_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts,daily&appid=${WEATHER_API_KEY}`
     const [forecast, setForecast] = useState({});
-    console.log(forecast)
+    //console.log(forecast)
 
     useEffect(() => {
         fetch(FORECAST_URL) 

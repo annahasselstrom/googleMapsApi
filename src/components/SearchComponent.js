@@ -49,7 +49,7 @@ import usePlacesAutocomplete, {
     
         try {
           const results = await getGeocode({ address });
-          console.log(results[0])
+          /*console.log(results[0])*/
           const { lat, lng } = await getLatLng(results[0]);
           panTo({ lat, lng });
           setNewLat(lat);
