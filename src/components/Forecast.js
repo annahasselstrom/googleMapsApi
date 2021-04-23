@@ -18,12 +18,12 @@ export const Forecast = ({ newLat, newLng }) => {
             })
         .catch((error) => console.log(error))
     }, [])
-
+console.log(forecast)
     return (
         <section className="forecast">
             {forecast && newLat && newLng &&
                 <>
-                   <h4>Latitude: {forecast.lat}</h4> 
+                   <h4>Latitude: {forecast.dt}</h4> 
                    <h4>Longitude: {forecast.lon}</h4>
                    <h4>Timezone: {forecast.timezone}</h4>
                    <h4>Latitude: {forecast.lat}</h4> 
