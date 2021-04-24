@@ -46,8 +46,7 @@ export const ScrollDialog = ({ newLat, newLng }) => {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogContent>
-          <DialogContentText
+        <DialogContent
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
@@ -63,8 +62,6 @@ export const ScrollDialog = ({ newLat, newLng }) => {
                 "Sorry, no data available"
               }                
             </section>
-           
-          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
