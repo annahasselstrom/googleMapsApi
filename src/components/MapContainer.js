@@ -7,7 +7,7 @@ import {
 import { SearchComponent } from './SearchComponent';
 import { LocateComponent } from './LocateComponent';
 import { ScrollDialog } from './ScrollDialog';
-import { Directions } from './Directions';
+//import { Directions } from './Directions';
 
 // Genom att flytta ut variablerna nedan förhindras att maps re-rendrar 
 // och går tillbaka till center position om vi t ex sätter en marker.
@@ -39,8 +39,8 @@ export const MapContainer = ()=> {
     const mapId = "map";
     
     // får sitt värde när användaren klickar på markern -InfoWindow
-    const [selected, setSelected] = useState(null);
-    //console.log(selected)
+    const [setSelected] = useState(null);
+    console.log(currentPosition)
     const onMarkerDragEnd = (e) => {
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();

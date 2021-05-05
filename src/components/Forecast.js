@@ -21,8 +21,8 @@ export const Forecast = ({ newLat, newLng }) => {
                 //setForecastCurrent(data.current.dt)
             })
         .catch((error) => console.log(error))
-    }, [])
-console.log(forecast)
+    }, [FORECAST_URL])
+
     return (
         <section className="forecast">
             {forecast && newLat && newLng &&
