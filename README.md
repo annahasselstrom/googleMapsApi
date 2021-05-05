@@ -4,7 +4,7 @@ An app where I use the Google Maps API together with the Open Weather API to cre
 
 ## View it live 👀
 
-modest-jepsen-4e0696.netlify.app
+https://modest-jepsen-4e0696.netlify.app/
 
 ## Features
 
